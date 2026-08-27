@@ -123,6 +123,7 @@
   --app-font-serif: 'Georgia', serif;
   --app-font-mono: 'Menlo', monospace;
   --radius: 0.5rem;
+  --portal-table-stripe: 210 10% 88%;
   
   --shadow-2xs: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
   --shadow-xs: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
@@ -194,6 +195,7 @@
   --chart-3: 173 58% 39%;
   --chart-4: 0 84% 60%;
   --chart-5: 283 39% 53%;
+  --portal-table-stripe: 217 32% 22%;
 }
 
 @layer base {
@@ -657,26 +659,68 @@
   }
 
   .portal-table-header {
-    background: hsl(var(--muted));
+    background: hsl(var(--card));
   }
 
   .portal-table-header th {
     height: 2.5rem;
     color: hsl(var(--foreground));
-    font-size: .67rem;
+    font-size: .78rem;
     font-weight: 700;
-    letter-spacing: .035em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .portal-reference-table th:nth-child(1) {
+    width: 18%;
+  }
+
+  .portal-reference-table th:nth-child(2) {
+    width: 42%;
+  }
+
+  .portal-reference-table th:nth-child(3),
+  .portal-reference-table th:nth-child(4) {
+    width: 14%;
+  }
+
+  .portal-reference-table th:nth-child(5) {
+    width: 12%;
   }
 
   .portal-table-row:hover {
     background: hsl(var(--muted));
   }
 
+  .portal-table-row:nth-child(odd) {
+    background: hsl(var(--portal-table-stripe));
+  }
+
+  .portal-table-row:nth-child(odd):hover {
+    background: hsl(var(--portal-table-stripe));
+    filter: brightness(.97);
+  }
+
   .portal-table-row td {
     padding-top: .8rem;
     padding-bottom: .8rem;
     border-color: hsl(var(--border));
+  }
+
+  .portal-number-cell {
+    color: hsl(var(--foreground));
+    font-size: .92rem;
+    font-weight: 500;
+    line-height: 1.32;
+    overflow-wrap: anywhere;
+    vertical-align: top !important;
+  }
+
+  .portal-date-cell {
+    color: hsl(var(--foreground));
+    font-size: .85rem;
+    white-space: nowrap;
+    vertical-align: top !important;
   }
 
   .portal-type-badge {
@@ -719,6 +763,23 @@
     color: hsl(var(--primary));
     font-size: .65rem;
     background: hsl(var(--card));
+  }
+
+  .portal-attachment-button {
+    width: 2.25rem;
+    height: 2.25rem;
+    color: #0868b7;
+    border-radius: .15rem;
+  }
+
+  .portal-attachment-button:hover {
+    background: rgba(8, 104, 183, .12);
+    color: #064f8c;
+  }
+
+  .portal-attachment-button svg {
+    width: 1.15rem;
+    height: 1.15rem;
   }
 
   .portal-contact-card {
@@ -906,6 +967,16 @@
 
   .dark .portal-table-row:hover {
     background: hsl(var(--muted));
+  }
+
+  .dark .portal-table-row:nth-child(odd),
+  .dark .portal-table-row:nth-child(odd):hover {
+    background: hsl(var(--portal-table-stripe));
+    filter: none;
+  }
+
+  .dark .portal-attachment-button {
+    color: #7db8e7;
   }
 
   .portal-mobile-nav-toggle {

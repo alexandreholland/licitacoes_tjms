@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowRight, BookOpen, Building2, Clock3, Download, ExternalLink, FileKey, FileText, Info, Mail, MessageCircle, Phone, Search, Settings } from 'lucide-react';
+import { ArrowRight, BookOpen, Building2, Clock3, Download, ExternalLink, FileKey, Info, Mail, MessageCircle, Phone, Search, Settings } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 
@@ -54,13 +54,6 @@ export default function Home() {
         description: `${filename} baixado com sucesso.`,
       });
     }, 1500);
-  };
-
-  const statusColors: Record<string, string> = {
-    'Em Andamento': 'bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400',
-    'Encerrado': 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-300',
-    'Prorrogado': 'bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400',
-    'Republicado': 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400',
   };
 
   if (!isLoaded) return <div className="min-h-screen flex items-center justify-center">Carregando...</div>;
@@ -208,21 +201,20 @@ export default function Home() {
 
         <Card className="portal-table-card">
           <div className="overflow-x-auto">
-            <Table>
+            <Table className="portal-reference-table">
               <TableHeader className="portal-table-header">
                 <TableRow>
-                  <TableHead className="w-[120px]">Tipo</TableHead>
-                  <TableHead className="w-[130px]">Número/Ano</TableHead>
-                  <TableHead className="min-w-[300px]">Objeto</TableHead>
-                  <TableHead className="w-[180px]">Vigência</TableHead>
-                  <TableHead className="w-[130px]">Situação</TableHead>
-                  <TableHead className="text-right w-[200px]">Documentos</TableHead>
+                  <TableHead>Número</TableHead>
+                  <TableHead>Objeto</TableHead>
+                  <TableHead>Prazo inicial</TableHead>
+                  <TableHead>Prazo final</TableHead>
+                  <TableHead className="text-center">Anexo(s)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredNotices.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center py-12 text-muted-foreground">
+                    <TableCell colSpan={5} className="text-center py-12 text-muted-foreground">
                       <div className="flex flex-col items-center gap-2">
                         <Search className="h-8 w-8 text-muted-foreground/30" />
                         Nenhum aviso encontrado com os filtros atuais.
@@ -231,55 +223,29 @@ export default function Home() {
                   </TableRow>
                 ) : (
                   filteredNotices.map((notice) => {
-                    const status = getNoticeStatus(notice);
                     return (
                       <TableRow key={notice.id} className="portal-table-row">
-                        <TableCell>
-                          <Badge variant="outline" className="portal-type-badge">
-                            {notice.type}
-                          </Badge>
+                        <TableCell className="portal-number-cell">
+                          {notice.type} - {notice.number}
                         </TableCell>
-                        <TableCell className="font-semibold text-primary text-xs md:text-sm">{notice.number}</TableCell>
                         <TableCell className="text-sm text-foreground/90 leading-relaxed">{notice.object}</TableCell>
-                        <TableCell className="text-xs md:text-sm text-muted-foreground whitespace-nowrap">
-                          {format(new Date(notice.startDate), 'dd/MM/yyyy')} a <br/>
+                        <TableCell className="portal-date-cell">
+                          {format(new Date(notice.startDate), 'dd/MM/yyyy')}
+                        </TableCell>
+                        <TableCell className="portal-date-cell">
                           {format(new Date(notice.endDate), 'dd/MM/yyyy')}
                         </TableCell>
-                        <TableCell>
-                          <Badge variant="secondary" className={`${statusColors[status]} portal-status-badge`}>
-                            {status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <div className="portal-document-actions">
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              className="portal-document-button"
-                              onClick={() => handleSimulateDownload(notice.avisoFile)}
-                            >
-                              <FileText className="h-3.5 w-3.5 mr-1.5" />
-                              Aviso
-                            </Button>
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              className="portal-document-button"
-                              onClick={() => handleSimulateDownload(notice.trFile)}
-                            >
-                              <FileText className="h-3.5 w-3.5 mr-1.5" />
-                              TR
-                            </Button>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="portal-document-all"
-                              onClick={() => handleSimulateDownload(`Arquivos_${notice.number.replace('/','_')}.zip`)}
-                            >
-                              <Download className="h-3.5 w-3.5 mr-1.5" />
-                              Baixar todos
-                            </Button>
-                          </div>
+                        <TableCell className="text-center">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="portal-attachment-button"
+                            onClick={() => handleSimulateDownload(`Arquivos_${notice.number.replace('/','_')}.zip`)}
+                            aria-label={`Baixar anexos de ${notice.number}`}
+                            title="Baixar anexos"
+                          >
+                            <Download />
+                          </Button>
                         </TableCell>
                       </TableRow>
                     );

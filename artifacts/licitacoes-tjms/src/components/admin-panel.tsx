@@ -180,10 +180,10 @@ export function AdminPanel({ open, onOpenChange }: AdminPanelProps) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:max-w-xl md:max-w-2xl flex flex-col p-0 border-l">
-        <div className="p-6 border-b bg-muted/30">
+      <SheetContent side="right" className="w-full sm:max-w-xl md:max-w-2xl flex flex-col p-0 border-l-4 border-l-primary">
+        <div className="p-6 border-b bg-[#f1f3f4] dark:bg-muted/30">
           <SheetHeader>
-            <SheetTitle className="text-2xl text-primary font-bold">Painel do Gestor</SheetTitle>
+            <SheetTitle className="text-xl text-primary font-bold">Painel do Gestor</SheetTitle>
             <SheetDescription>
               Gerencie as publicações de Licitações e Contratações Diretas.
             </SheetDescription>
@@ -194,7 +194,7 @@ export function AdminPanel({ open, onOpenChange }: AdminPanelProps) {
           <div className="flex-1 flex flex-col overflow-hidden">
             <div className="p-4 border-b flex justify-between items-center bg-card">
               <h3 className="font-semibold">Avisos Cadastrados</h3>
-              <Button onClick={() => handleOpenForm()} size="sm" className="gap-2">
+              <Button onClick={() => handleOpenForm()} size="sm" className="gap-2 rounded-sm">
                 <Plus className="h-4 w-4" />
                 Novo Aviso
               </Button>
@@ -207,7 +207,7 @@ export function AdminPanel({ open, onOpenChange }: AdminPanelProps) {
                   </div>
                 )}
                 {allNotices.map((notice) => (
-                  <div key={notice.id} className={`bg-card p-4 rounded-lg border shadow-sm transition-opacity ${!notice.active ? 'opacity-50 grayscale' : ''}`}>
+                  <div key={notice.id} className={`bg-card p-4 rounded-sm border shadow-xs transition-opacity ${!notice.active ? 'opacity-50 grayscale' : ''}`}>
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center gap-2">
                         <Badge variant={notice.active ? 'default' : 'secondary'} className={notice.active ? 'bg-primary' : ''}>

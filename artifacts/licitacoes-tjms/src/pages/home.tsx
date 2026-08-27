@@ -83,7 +83,6 @@ export default function Home() {
           </Button>
         </div>
       </section>
-
       {/* External Links / Systems */}
       <section id="sistemas" className="portal-section">
         <div className="portal-section-heading">
@@ -155,7 +154,6 @@ export default function Home() {
           </a>
         </div>
       </section>
-
       {/* Main Table Section */}
       <section id="contratacoes" className="portal-section">
         <div className="portal-section-heading portal-section-heading-table">
@@ -292,7 +290,6 @@ export default function Home() {
           </div>
         </Card>
       </section>
-
       {/* Contact Section */}
       <section id="atendimento" className="portal-section portal-section-last">
         <div className="portal-section-heading">
@@ -353,9 +350,7 @@ export default function Home() {
                 <div className="portal-contact-icon text-primary">
                   <Mail className="h-4 w-4" />
                 </div>
-                <a href="mailto:contratos@tjms.jus.br" className="font-medium text-blue-700 dark:text-blue-300 hover:underline">
-                  contratos@tjms.jus.br
-                </a>
+                <a href="mailto:contratos@tjms.jus.br" className="font-medium text-blue-700 dark:text-blue-300 hover:underline">compras@tjms.jus.br</a>
               </div>
             </CardContent>
           </Card>
@@ -381,7 +376,6 @@ export default function Home() {
           </Card>
         </div>
       </section>
-
       {/* Admin Panel Modal/Sheet */}
       <AdminPanel open={adminOpen} onOpenChange={setAdminOpen} />
     </Layout>

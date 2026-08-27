@@ -364,7 +364,7 @@ export default function Home() {
                 <div className="portal-contact-icon text-primary">
                   <Clock3 className="h-4 w-4" />
                 </div>
-                <span className="font-semibold">11:00 às 19:00 horas</span>
+                <span className="font-semibold">11h às 19h (horário de Brasília)</span>
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">
                 Horário de Brasília / TJMS. Observe o prazo final indicado em cada aviso para o recebimento de propostas.

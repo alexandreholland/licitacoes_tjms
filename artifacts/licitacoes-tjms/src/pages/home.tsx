@@ -358,7 +358,6 @@ export default function Home() {
           <Card className="portal-contact-card portal-contact-card-highlight">
             <CardHeader className="portal-card-header">
               <CardTitle className="portal-card-title text-primary flex items-center gap-2">Horário de Atendimento</CardTitle>
-              <CardDescription>Expediente da Coordenadoria de Compras.</CardDescription>
             </CardHeader>
             <CardContent className="portal-contact-content">
               <div className="flex items-center gap-3 text-sm">

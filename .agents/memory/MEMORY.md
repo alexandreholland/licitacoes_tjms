@@ -1,0 +1,1 @@
+- [Uploaded assets after project handoff](uploaded-assets-after-handoff.md) — mirror preserved conversation assets into attached_assets before using the Vite @assets alias.

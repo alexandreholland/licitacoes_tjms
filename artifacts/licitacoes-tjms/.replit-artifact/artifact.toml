@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Licitações e Contratações TJMS"
+description = "Protótipo responsivo da página de Licitações e Contratações Diretas do Tribunal de Justiça de Mato Grosso do Sul, com consulta pública, filtros, documentos e painel gestor simulado."
+version = "1.0.0"
+id = "artifacts/licitacoes-tjms"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19249
+
+[services.development]
+run = "pnpm --filter @workspace/licitacoes-tjms run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/licitacoes-tjms", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/licitacoes-tjms/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19249"
+BASE_PATH = "/"

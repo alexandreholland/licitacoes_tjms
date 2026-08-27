@@ -1,0 +1,92 @@
+Você é um desenvolvedor Frontend Sênior e Especialista em UI/UX para órgãos do Poder Judiciário. Sua missão é criar um protótipo completo, moderno, funcional, responsivo e interativo para a nova página de **"Licitações e Contratações Diretas" do Tribunal de Justiça de Mato Grosso do Sul (TJMS)**, atendendo à demanda institucional DDS-20327 / DTIC-1247.
+
+### 🎨 DIRETRIZES VISUAIS E DESIGN SYSTEM (PADRÃO TJMS)
+1. **Identidade Visual:**
+   - Paleta de Cores: Azul Marinho Institucional (#002b49 ou #0B3B60), Azul Real (#1A73E8), Verde Acento (#00875A ou #2E7D32 para status ativos), Cinza Neutro Claro (#F8F9FA ou #F4F6F8 para fundos) e Branco (#FFFFFF para os cards).
+   - Estilo Visual: Inspirado na página moderna do TJMS (`/comitedasaude`). Cards brancos com bordas suaves (`rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all`), ícones circulares com fundo sutilmente colorido, tipografia limpa (Inter, Roboto ou Segoe UI) e layout arejado.
+   - Header institucional moderno do TJMS com brasão/logotipo estilizado e trilha de navegação (Breadcrumbs).
+
+---
+
+### 🚀 ESTRUTURA DA PÁGINA E FUNCIONALIDADES OBRIGATÓRIAS
+
+#### 1. Cabeçalho & Hero Section
+- **Topo Institucional:** Barra superior com logotipo "PODER JUDICIÁRIO - TRIBUNAL DE JUSTIÇA DE MATO GROSSO DO SUL" e opções de acessibilidade (Alto Contraste, Aumentar Fonte).
+- **Breadcrumb:** `Início` > `Transparência e Governança` > `Licitações e Contratações Diretas`.
+- **Hero Banner:** Título "Licitações e Contratações Diretas", subtítulo explicativo e um botão destacado para alternar para o **"Painel do Gestor (Área Administrativa)"** para simulação de cadastro.
+
+#### 2. Seção de Acesso Rápido (Cards Grid 4 Colunas)
+Crie 4 cards modernos com ícones dedicados (usando `lucide-react` ou SVGs):
+1. **Licitações e Dispensas Eletrônicas (Compras.gov):**
+   - Destaque com badge: `UASG 929735`
+   - Descrição: Consulta de editais, disputas eletrônicas e envio de propostas no Portal de Compras do Governo Federal.
+   - Link de Ação com badge "Acessar Compras.gov".
+2. **SICAF (Cadastro de Fornecedores):**
+   - Descrição: Sistema de Cadastramento Unificado de Fornecedores da Administração Pública.
+   - Link de Ação "Cadastrar / Consultar SICAF".
+3. **Legado de Licitações (Até 2025):**
+   - Descrição: Consulta ao acervo histórico de processos licitatórios e resultados no SGC - Sistema Gestor de Compras do TJMS.
+   - Link de Ação "Acessar Acervo SGC".
+4. **Manuais e Orientações:**
+   - Descrição: Guias práticos, tutoriais de operacionalização e manuais para fornecedores no Compras.gov.
+   - Link de Ação "Ver Manuais".
+
+#### 3. Seção Principal: Dispensas de Licitação Tradicionais (Sem Disputa Eletrônica)
+*Esta é a funcionalidade central demandada pela Coordenadoria de Compras.*
+- **Barra de Ferramentas e Filtros:**
+  - Campo de busca instantânea (filtra por número ou objeto).
+  - Filtro de Status em botões/pills: `Todos`, `Em Andamento (Abertos)`, `Prorrogados`, `Republicados`, `Encerrados`.
+  - Filtro de Ano: `2026`, `2025`.
+- **Tabela Interativa e Responsiva:**
+  - Colunas:
+    1. **Identificador / Tipo:** Exibe badges coloridos (`#Aviso`, `#Prorrogação`, `#Republicação`) + Número do Processo (Ex: `AVISO DE CONTRATAÇÃO DIRETA Nº 038/2026 - FEADMP`).
+    2. **Objeto:** Texto explicativo do objeto a ser contratado.
+    3. **Prazo Inicial:** Data no formato `DD/MM/AAAA`.
+    4. **Prazo Final (Limite):** Data com badge indicando se está "Dentro do Prazo" (verde) ou "Encerrado" (cinza).
+    5. **Anexos e Documentos:** Botões com ícones de PDF para baixar:
+       - 📄 *Aviso de Dispensa* (com modal de pré-visualização ou download simulado).
+       - 📑 *Termo de Referência (TR)*.
+       - 📥 *Baixar Todos (.ZIP)*.
+- **Dados Iniciais (Mock Data baseado nas demandas reais):**
+  - **Item 1:** `#Prorrogação - AVISO DE CONTRATAÇÃO DIRETA Nº 038/2026 - FEADMP` | *REPUBLICAÇÃO Fornecimento de Kits APH tático completos* | 27/07/2026 a 30/07/2026 | Status: Prorrogado/Aberto.
+  - **Item 2:** `#Republicação - AVISO DE CONTRATAÇÃO DIRETA - DISPENSA Nº 036/2026` | *Aquisição de moedas institucionais personalizadas, destinadas à distribuição a colaboradores, convidados e participantes de eventos institucionais, com o objetivo de fortalecer a identidade institucional e fomentar a cooperação interinstitucional* | 27/07/2026 a 30/07/2026 | Status: Republicado/Aberto.
+  - **Item 3:** `#AVISO DE CONTRATAÇÃO DIRETA - DISPENSA Nº 044/2026` | *Aquisição de material permanente (persianas) e fornecimento de serviços de instalação de persianas* | 27/07/2026 a 30/07/2026 | Status: Aberto.
+  - **Item 4 (Encerrado para teste):** `#AVISO DE CONTRATAÇÃO DIRETA Nº 025/2026` | *Fornecimento de água mineral natural acondicionada em garrafões retornáveis de 20 litros* | 10/06/2026 a 15/06/2026 | Status: Encerrado.
+
+#### 4. Modo Gerenciador / Painel Administrativo (Simulação Real)
+- Crie um painel flutuante ou modal acessível por botão no cabeçalho ("Painel Administrativo da Coordenadoria de Compras").
+- Funcionalidades interativas com persistência no `localStorage`:
+  - **Formulário de Cadastro:**
+    - Seleção do Tipo (`#Aviso Inicial`, `#Prorrogação`, `#Republicação`).
+    - Campo Número do Aviso / Processo.
+    - Campo Objeto detalhado.
+    - Campos de Data Inicial e Data Final.
+    - Upload simulado de arquivos (Aviso e TR).
+  - Ao salvar, o novo aviso deve aparecer imediatamente na tabela pública!
+  - Opção de **Editar** ou **Excluir** registros existentes.
+
+#### 5. Seção de Contatos e Atendimento (Padrão Cards TJMS)
+Crie uma seção dedicada intitulada **"Canais de Atendimento e Informações"**:
+- **Card 1 - Departamento de Compras e Licitações:**
+  - Ícone institucional / Prédio.
+  - E-mail: `licitacao@tjms.jus.br` (link `mailto:`).
+  - Telefones: `(67) 3314-1329` / `(67) 3314-1517`.
+- **Card 2 - Coordenadoria de Compras:**
+  - Ícone de sacola de compras / cotações.
+  - E-mail: `compras@tjms.jus.br`.
+  - Telefone fixo: `(67) 3314-1338`.
+  - **Botão WhatsApp em destaque:** Link direto para `(67) 99825-6693` com mensagem pré-formatada.
+- **Card 3 - Horário e Atendimento Institucional:**
+  - Ícone de Relógio / Calendário.
+  - Horário: **11:00 às 19:00 horas (Horário de Brasília / TJMS)**.
+  - Instrução clara sobre prazos para recebimento de propostas em dispensas físicas.
+
+#### 6. Rodapé
+- Rodapé padrão do TJMS com dados da sede (Parque dos Poderes, Campo Grande - MS), direitos reservados e link para o portal da transparência.
+
+---
+
+### 💻 REQUISITOS TÉCNICOS DE IMPLEMENTAÇÃO NO REPLIT
+- Utilize **React (Vite) + Tailwind CSS + Lucide Icons** (ou HTML5/Tailwind/JS moderno com visual impecável).
+- Todas as interações devem ser fluidas, com animações suaves de entrada, transições de hover nos cards e tabelas, tooltips explicativos na UASG 929735 e feedback visual (toasts de confirmação ao cadastrar ou baixar arquivos).
+- Código modular, limpo, bem documentado e pronto para visualização responsiva.
